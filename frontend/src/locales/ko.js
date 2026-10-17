@@ -2242,4 +2242,13 @@ export default {
   'Your sports watch, calling you back.': '스포츠 시계가 다시 부르고 있어요.',
   'Coach wants you back on the bar.': '코치가 바 앞으로 돌아오래요.',
   'Gentle, for headphones or a quiet room.': '이어폰이나 조용한 곳에 어울려요.',
+  'Watch recordings': '워치 기록',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': '운동 중 Apple Watch가 기록한 움직임으로, 세트 감지를 학습시키는 데 씁니다. 공유하기 전까지 이 휴대폰에만 남아 있습니다.',
+  '{0} files · {1} MB': '파일 {0}개 · {1}MB',
+  'None yet. Switch on Record motion on the watch to collect some.': '아직 없습니다. 워치에서 “Record motion”을 켜서 모아 보세요.',
+  'Delete the watch recordings?': '워치 기록을 삭제할까요?',
+  'On your server': '내 서버에',
+  '{0} recordings · {1} MB': '기록 {0}개 · {1}MB',
+  'Upload now': '지금 업로드',
+  'Couldn’t upload. They stay on this phone and go up next time.': '업로드하지 못했습니다. 이 휴대폰에 남아 있다가 다음에 업로드됩니다.',
 }

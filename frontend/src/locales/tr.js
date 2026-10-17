@@ -2242,4 +2242,13 @@ export default {
   'Your sports watch, calling you back.': 'Spor saatin seni geri çağırıyor.',
   'Coach wants you back on the bar.': 'Koç seni bara geri bekliyor.',
   'Gentle, for headphones or a quiet room.': 'Sakin, kulaklık ya da sessiz bir oda için.',
+  'Watch recordings': 'Saat kayıtları',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'Apple Watch’unun antrenmanlar sırasında kaydettiği hareket, set algılamayı eğitmek için. Paylaşana kadar bu telefonda kalır.',
+  '{0} files · {1} MB': '{0} dosya · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Henüz yok. Toplamak için saatte “Record motion”ı aç.',
+  'Delete the watch recordings?': 'Saat kayıtları silinsin mi?',
+  'On your server': 'Sunucunda',
+  '{0} recordings · {1} MB': '{0} kayıt · {1} MB',
+  'Upload now': 'Şimdi yükle',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Yüklenemedi. Bu telefonda kalırlar ve bir dahaki sefere yüklenirler.',
 }

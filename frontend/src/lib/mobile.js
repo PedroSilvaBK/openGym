@@ -33,6 +33,17 @@ export async function isAndroid() {
   }
 }
 
+// The iOS app shell. Same shape as isAndroid: false on the web build and anywhere it cannot tell.
+export async function isIOS() {
+  if (!MOBILE) return false
+  try {
+    const { Capacitor } = await import('@capacitor/core')
+    return Capacitor.getPlatform() === 'ios'
+  } catch (e) {
+    return false
+  }
+}
+
 const FILE = 'opengym-state.json'
 
 export async function nativeLoad() {

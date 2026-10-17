@@ -2321,4 +2321,13 @@ export default {
   'Your sports watch, calling you back.': 'আপনার স্পোর্টস ঘড়ি আপনাকে ফিরে ডাকছে।',
   'Coach wants you back on the bar.': 'কোচ আপনাকে আবার বারে চান।',
   'Gentle, for headphones or a quiet room.': 'মৃদু, হেডফোন বা শান্ত ঘরের জন্য।',
+  'Watch recordings': 'ঘড়ির রেকর্ডিং',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'ওয়ার্কআউটের সময় আপনার Apple Watch যে নড়াচড়া রেকর্ড করেছে, সেট শনাক্তকরণ শেখানোর জন্য। আপনি শেয়ার না করা পর্যন্ত এটি এই ফোনেই থাকে।',
+  '{0} files · {1} MB': '{0}টি ফাইল · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': 'এখনও কিছু নেই। কিছু সংগ্রহ করতে ঘড়িতে “Record motion” চালু করুন।',
+  'Delete the watch recordings?': 'ঘড়ির রেকর্ডিং মুছবেন?',
+  'On your server': 'আপনার সার্ভারে',
+  '{0} recordings · {1} MB': '{0}টি রেকর্ডিং · {1} MB',
+  'Upload now': 'এখনই আপলোড করুন',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'আপলোড করা যায়নি। এগুলো এই ফোনেই থাকবে এবং পরের বার আপলোড হবে।',
 }

@@ -2242,4 +2242,13 @@ export default {
   'Your sports watch, calling you back.': '你的运动手表在叫你回来。',
   'Coach wants you back on the bar.': '教练等你回到杠铃前。',
   'Gentle, for headphones or a quiet room.': '轻柔，适合耳机或安静的房间。',
+  'Watch recordings': '手表记录',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': '你的 Apple Watch 在训练时记录的动作数据，用于训练组次识别。在你分享之前，它只保存在这台手机上。',
+  '{0} files · {1} MB': '{0} 个文件 · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': '还没有。在手表上打开“Record motion”来收集数据。',
+  'Delete the watch recordings?': '删除手表记录？',
+  'On your server': '在你的服务器上',
+  '{0} recordings · {1} MB': '{0} 条记录 · {1} MB',
+  'Upload now': '立即上传',
+  'Couldn’t upload. They stay on this phone and go up next time.': '上传失败。它们会留在这台手机上，下次再上传。',
 }

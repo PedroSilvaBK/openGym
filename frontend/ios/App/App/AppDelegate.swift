@@ -5,7 +5,9 @@ import Capacitor
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Before any page loads: a watch message can wake the app in the background with no
+        // WebView at all, and WatchLink still has to take it (WatchLink.swift).
+        WatchLink.shared.activate()
         return true
     }
 

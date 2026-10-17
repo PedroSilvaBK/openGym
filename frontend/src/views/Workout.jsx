@@ -43,6 +43,7 @@ import { bestSetFor } from '../lib/exercise-history.js'
 import { isWarmupRow, isFailureSet, toggleFailure, isDropSet, isRestPauseSet, dropsOf, clustersOf, addDrop, addCluster, removeDropAt, removeClusterAt, setDropAt, setClusterAt, nextDropWeight, nextBurstReps, isSideSet, makeSideSet, setSideField, toggleSide, addSideDrop, removeSideDropAt, setSideDropAt, addSideCluster, removeSideClusterAt, setSideClusterAt, WEIGHT_ORIGIN_MANUAL } from '../lib/workout-model.js'
 import { canMoveActiveWorkoutUnit, moveActiveWorkoutUnit, canMoveActiveWorkoutEntry, moveActiveWorkoutEntry } from '../lib/active-workout-order.js'
 import { nextOpenSet, workoutKeyAction } from '../lib/workout-keys.js'
+import { bindWatchTicks, watchTickTarget } from '../lib/watch.js'
 import { MUSCLE_NAME } from '../lib/muscles.js'
 import FocusView from './FocusView.jsx'
 import { withMeaning, historyAs, dbLoadFor, entryDbLoad, bellsIn, ownedWeightsFor, stepOwned } from '../lib/dumbbells.js'
@@ -1829,6 +1830,31 @@ function ActiveWorkout() {
     else toggle(next.idx, next.i, next.side)
     return true
   }
+  // Done on the Apple Watch (lib/watch.js): the same tick a tap or the hardware key makes, quiet
+  // because the wrist already buzzed. Then the watch's clock wins: the set was done when the wrist
+  // said, and the rest the watch started at that moment is the one that runs here, shortened by
+  // however long the phone took to wake (gone altogether if it is already over).
+  const onWatchTick = useRef(null)
+  onWatchTick.current = ev => {
+    if (editing || A.backfill) return
+    const fresh = useStore.getState().S.active
+    const target = watchTickTarget(fresh?.entries, ev, fresh?.id, fresh?.cur)
+    if (!target) return
+    if (!unitOf(units, target.idx).includes(cur)) focusUnit(target.idx)
+    toggle(target.idx, target.i, target.side, { quiet: true })
+    if (ev.at > 0 && !target.side) {
+      update(s => {
+        const set = s.active?.entries?.[target.idx]?.sets?.[target.i]
+        if (set?.done) set.at = Math.round(ev.at)
+      })
+    }
+    const rest = useUI.getState().timer
+    if (ev.restEndsAt > 0 && rest && !rest.ready && !rest.paused) {
+      const shift = Math.round((ev.restEndsAt - rest.endsAt) / 1000)
+      if (shift) useUI.getState().addRest(shift)
+    }
+  }
+  useEffect(() => bindWatchTicks(ev => onWatchTick.current?.(ev)), [])
   useEffect(() => {
     // A Space that ticked must not also press the button a click left focus on. Preventing the
     // keydown is enough for Chrome; Firefox presses a button on the keyup, so that goes too.

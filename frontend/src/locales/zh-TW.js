@@ -2235,4 +2235,13 @@ export default {
   'Your sports watch, calling you back.': '你的運動手錶在叫你回來。',
   'Coach wants you back on the bar.': '教練等你回到槓鈴前。',
   'Gentle, for headphones or a quiet room.': '輕柔，適合耳機或安靜的房間。',
+  'Watch recordings': '手錶記錄',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': '你的 Apple Watch 在訓練時記錄的動作資料，用於訓練組數辨識。在你分享之前，它只會留在這支手機上。',
+  '{0} files · {1} MB': '{0} 個檔案 · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': '還沒有。在手錶上開啟「Record motion」來收集資料。',
+  'Delete the watch recordings?': '刪除手錶記錄？',
+  'On your server': '在你的伺服器上',
+  '{0} recordings · {1} MB': '{0} 筆記錄 · {1} MB',
+  'Upload now': '立即上傳',
+  'Couldn’t upload. They stay on this phone and go up next time.': '上傳失敗。它們會留在這支手機上，下次再上傳。',
 }

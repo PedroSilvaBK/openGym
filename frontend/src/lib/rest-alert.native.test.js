@@ -1,5 +1,5 @@
-// The Capacitor side of the rest alert (#296). The iOS app has no RestAlert plugin, and the
-// listener this file adds at startup used to reject there with nothing to catch it. On Android
+// The Capacitor side of the rest alert (#296). Both apps have a RestAlert plugin; the iOS one
+// (a Live Activity) has no buzz and no tone, and those reject there as Capacitor's do. On Android
 // the plugin is a Capacitor proxy that answers `then` with a native call that never settles, so
 // it must never become the value of a promise (the Coach hang, #42): here that would hang every
 // rest alert call.
@@ -14,14 +14,14 @@ const h = vi.hoisted(() => {
 })
 
 // Shaped like the proxy registerPlugin() returns: every property is a native method, `then`
-// included, and that one never calls back. Off Android every method rejects, as Capacitor's do
-// for a plugin the platform does not have.
+// included, and that one never calls back. On iOS buzz and tone reject, as Capacitor's do for a
+// method the platform does not have.
 const pluginProxy = () => new Proxy({}, {
   get: (_, prop) => {
     if (prop === 'then') return () => new Promise(() => {})
     return (...args) => {
       h.calls.push(String(prop))
-      if (h.platform !== 'android') return Promise.reject(new Error(`"RestAlert.${String(prop)}()" is not implemented on ${h.platform}`))
+      if (h.platform === 'ios' && (prop === 'buzz' || prop === 'tone')) return Promise.reject(new Error(`"RestAlert.${String(prop)}()" is not implemented on ${h.platform}`))
       return Promise.resolve(prop === 'addListener' ? { remove: async () => {} } : undefined)
     }
   },
@@ -59,17 +59,51 @@ afterAll(() => {
 })
 
 describe('the rest alert in the iOS app', () => {
-  it('registers nothing, rejects nothing and leaves the end to the server push', async () => {
+  it('books the end natively (the Live Activity), so no server push is needed', async () => {
     h.platform = 'ios'
     const alert = await import('./rest-alert.js')
-    await expect(alert.armRestAlert(Date.now() + 90_000, { totalSec: 90 })).resolves.toBe(false)
+    await expect(alert.armRestAlert(Date.now() + 90_000, { totalSec: 90, detail: 'Bench Press · 3/5' })).resolves.toBe(true)
     alert.holdRestAlert(60, 90)
     alert.setRestAccent('red')
     alert.disarmRestAlert()
     await settle()
-    expect(h.registerPlugin).not.toHaveBeenCalled()
-    expect(h.calls).toEqual([])
+    expect(h.registerPlugin).toHaveBeenCalledTimes(1)
+    expect(h.calls).toEqual(expect.arrayContaining(['addListener', 'schedule', 'hold', 'setAccent', 'cancel']))
     expect(unhandled).toEqual([])
+  })
+
+  it('keeps the workout activity up for a live session and takes it down after', async () => {
+    h.platform = 'ios'
+    const alert = await import('./rest-alert.js')
+    alert.showWorkoutActivity({ workoutStart: Date.now() - 60_000, workoutTitle: 'Full Body C' })
+    alert.endWorkoutActivity()
+    await settle()
+    expect(h.calls).toEqual(expect.arrayContaining(['workout', 'endWorkout']))
+    expect(h.calls.indexOf('workout')).toBeLessThan(h.calls.indexOf('endWorkout'))
+    expect(unhandled).toEqual([])
+  })
+
+  it('never calls buzz or tone there, and tells the caller to use the page\'s own', async () => {
+    h.platform = 'ios'
+    const alert = await import('./rest-alert.js')
+    await expect(alert.buzzAsAlarm([200, 100, 200])).resolves.toBe(false)
+    await expect(alert.toneNative('chime')).resolves.toBe(false)
+    await settle()
+    expect(h.calls).not.toContain('buzz')
+    expect(h.calls).not.toContain('tone')
+    expect(unhandled).toEqual([])
+  })
+})
+
+describe('the workout activity in the Android app', () => {
+  it('is iOS only: nothing reaches the plugin', async () => {
+    h.platform = 'android'
+    const alert = await import('./rest-alert.js')
+    alert.showWorkoutActivity({ workoutStart: Date.now(), workoutTitle: 'Push' })
+    alert.endWorkoutActivity()
+    await settle()
+    expect(h.calls).not.toContain('workout')
+    expect(h.calls).not.toContain('endWorkout')
   })
 })
 
@@ -166,11 +200,12 @@ describe('the alarm buzz in the Android app', () => {
     expect(calls.buzz).toHaveLength(1)
   })
 
-  it('answers false in the iOS app without touching any plugin', async () => {
+  it('answers false in the iOS app without calling buzz there', async () => {
     h.platform = 'ios'
     const alert = await import('./rest-alert.js')
     await expect(alert.buzzAsAlarm([200, 100, 200])).resolves.toBe(false)
-    expect(h.registerPlugin).not.toHaveBeenCalled()
+    await settle()
+    expect(h.calls).not.toContain('buzz')
     expect(unhandled).toEqual([])
   })
 })

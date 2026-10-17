@@ -1,12 +1,14 @@
 import { create } from 'zustand'
-import { uid } from '../lib/format.js'
+import { uid, exerciseNameText } from '../lib/format.js'
 import { beep, chime, vibrate, alertBuzz } from '../lib/sound.js'
 import { restSoundOf } from '../lib/rest-sounds.js'
 import { api } from '../lib/api.js'
 import { t } from '../lib/i18n.js'
+import { exOr } from '../lib/exercises.js'
+import { restDetail } from '../lib/rest-detail.js'
 import { deviceId } from '../lib/push.js'
 import { MOBILE } from '../lib/mobile.js'
-import { armRestAlert, bindNativeRest, disarmRestAlert, holdRestAlert, toneNative } from '../lib/rest-alert.js'
+import { armRestAlert, bindNativeRest, disarmRestAlert, holdRestAlert, toneNative, liveSession, showWorkoutActivity, endWorkoutActivity } from '../lib/rest-alert.js'
 import { useStore } from './useStore.js'
 import { REST_MAX } from '../lib/duration.js'
 import { accentValue } from '../lib/accent.js'
@@ -27,7 +29,10 @@ const bookRestEnd = (endsAt, totalSec, kind) => {
   const switching = kind === 'switch'
   if (!MOBILE) { if (!switching) pushRestTimer(Math.max(1, Math.round((endsAt - Date.now()) / 1000))); return }
   const { S } = useStore.getState()
-  armRestAlert(endsAt, { title: switching ? t('Switch sides') : t('Rest’s over. Next set!'), countdownTitle: switching ? t('Switch sides') : t('Rest'), totalSec, accent: accentValue(S), sound: !!S.sound, classic: restSoundOf(S) === 'classic', tone: restSoundOf(S), vibrate: S.vibrate !== false, alarmBuzz: S.vibrate !== false && !!S.vibrateOnSilent })
+  // What comes next, for the line under the iOS countdown. Android's notification does not show it.
+  const forIdx = useUI.getState().timer?.forIdx
+  const detail = S.active?.entries ? restDetail(S.active.entries, forIdx, e => exerciseNameText(exOr(e.id))) : ''
+  armRestAlert(endsAt, { title: switching ? t('Switch sides') : t('Rest’s over. Next set!'), countdownTitle: switching ? t('Switch sides') : t('Rest'), detail, session: liveSession(S.active), totalSec, accent: accentValue(S), sound: !!S.sound, classic: restSoundOf(S) === 'classic', tone: restSoundOf(S), vibrate: S.vibrate !== false, alarmBuzz: S.vibrate !== false && !!S.vibrateOnSilent })
     .then(ok => {
       // Only for the rest that asked: one skipped or moved since then has booked its own end.
       const tm = useUI.getState().timer
@@ -528,6 +533,24 @@ export function restoreWork(now = Date.now()) {
 }
 useUI.subscribe((s, prev) => { if (s.work !== prev.work && (!s.work || !prev.work || s.work.owner !== prev.work.owner || s.work.endsAt !== prev.work.endsAt || s.work.alerted !== prev.work.alerted)) saveWork(s.work) })
 restoreWork()
+
+// iOS: the workout's Live Activity follows the live session — up when one starts (or the app opens
+// on one), its name kept current, gone when it is finished or thrown away. Elsewhere these no-op.
+let shownSession = null
+const followSession = S => {
+  const live = liveSession(S?.active)
+  const key = live ? `${live.workoutStart}|${live.workoutTitle}` : ''
+  if (key === shownSession) return
+  const had = shownSession
+  shownSession = key
+  if (live) showWorkoutActivity(live, { accent: accentValue(S) })
+  // At launch with no session, an activity left by an app that was closed mid-workout goes too.
+  else if (had || had === null) endWorkoutActivity()
+}
+if (MOBILE) {
+  useStore.subscribe(s => followSession(s.S))
+  followSession(useStore.getState().S)
+}
 
 // Buttons on the rest notification (pause, ±15s, skip) change the countdown in the
 // service first, then mirror that into the in-app timer. skip ends it. Seconds round up, as the

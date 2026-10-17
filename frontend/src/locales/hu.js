@@ -2245,4 +2245,13 @@ export default {
   'Your sports watch, calling you back.': 'A sportórád visszahív.',
   'Coach wants you back on the bar.': 'Az edző visszavár a rúdhoz.',
   'Gentle, for headphones or a quiet room.': 'Halk, fülhallgatóhoz vagy csendes helyre.',
+  'Watch recordings': 'Órafelvételek',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'Az Apple Watch által edzés közben rögzített mozgás a sorozatfelismerés tanításához. Ezen a telefonon marad, amíg meg nem osztod.',
+  '{0} files · {1} MB': '{0} fájl · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Még nincs. Kapcsold be a „Record motion” opciót az órán a gyűjtéshez.',
+  'Delete the watch recordings?': 'Törlöd az órafelvételeket?',
+  'On your server': 'A szervereden',
+  '{0} recordings · {1} MB': '{0} felvétel · {1} MB',
+  'Upload now': 'Feltöltés most',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Nem sikerült feltölteni. A telefonon maradnak, és legközelebb felkerülnek.',
 }

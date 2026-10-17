@@ -153,6 +153,12 @@ tags:
       attached to a logged workout. Stored per profile (one quota for both) and named
       by the SHA-256 of its bytes; the state only carries a `MediaRef`. Every route here is a
       404 when the instance runs with `MEDIA_UPLOADS=0`.
+  - name: recordings
+    description: >-
+      Apple Watch training data for set detection: a workout's motion at 100 Hz and its labels,
+      uploaded by the paired phone in chunks (ml/README.md). Stored per profile under
+      DATA_DIR/recordings. Off by default: every route here is a 404 unless the instance sets
+      `RECORDINGS=1`.
   - name: coach
     description: >-
       AI Coach: plans, reviews and debriefs. Every route here answers 503 unless the
@@ -2953,7 +2959,128 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
 
+  /api/recordings:
+    get:
+      tags: [recordings]
+      operationId: listRecordings
+      summary: List your Apple Watch recordings
+      description: |
+        Every complete recording in the caller's folder (one whose manifest has arrived), oldest
+        first, with how many sets were labelled in it. `chunkBytes` is the largest chunk the
+        upload takes.
+      responses:
+        '200':
+          description: The recordings.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordings:
+                    type: array
+                    items: { $ref: '#/components/schemas/Recording' }
+                  chunkBytes: { type: integer, example: 4194304 }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+  /api/recordings/{name}:
+    parameters:
+      - $ref: '#/components/parameters/RecordingName'
+    get:
+      tags: [recordings]
+      operationId: getRecording
+      summary: Download a recording's motion or manifest
+      description: |
+        `?file=motion` (the raw float32 rows, see ml/README.md) or `?file=json` (the manifest,
+        the default), as an attachment. Only from the caller's own folder.
+      parameters:
+        - name: file
+          in: query
+          schema: { type: string, enum: [json, motion], default: json }
+      responses:
+        '200':
+          description: The file.
+          content:
+            application/octet-stream: { schema: { type: string, format: binary } }
+            application/json: { schema: { type: object } }
+        '400': { description: 'Not a recording name, or not `json`/`motion`.' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { description: 'No such recording in the caller''s folder.' }
+    delete:
+      tags: [recordings]
+      operationId: deleteRecording
+      summary: Delete a recording
+      description: Both files, and any upload of that name still in progress.
+      responses:
+        '200': { description: 'Deleted.', content: { application/json: { schema: { type: object, properties: { ok: { type: boolean } } } } } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { description: 'No such recording.' }
+  /api/recordings/{name}/chunk:
+    parameters:
+      - $ref: '#/components/parameters/RecordingName'
+    post:
+      tags: [recordings]
+      operationId: uploadRecordingChunk
+      summary: Upload a piece of a recording's motion file
+      description: |
+        Raw bytes appended at `?offset=` — at most `chunkBytes` (4 MiB), so every request fits the
+        5 MB the web container allows under /api/. The answer is always how much the server
+        holds: a chunk already received answers with the same size and is not appended twice,
+        and an offset past what the server holds is a 409 whose `size` says where to resume.
+        Counts against the profile's quota (`RECORDINGS_QUOTA_MB`, 4096 by default) and stops
+        while the disk has less than `RECORDINGS_MIN_FREE_MB` free. 600 requests an hour.
+      parameters:
+        - name: offset
+          in: query
+          required: true
+          schema: { type: integer, minimum: 0 }
+      requestBody:
+        required: true
+        content:
+          application/octet-stream: { schema: { type: string, format: binary } }
+      responses:
+        '200': { description: 'Held so far.', content: { application/json: { schema: { type: object, properties: { size: { type: integer } } } } } }
+        '400': { description: 'A bad name or offset.' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409': { description: '`offset`: resume from `size`. `exists`: that recording is already complete.' }
+        '413': { description: '`chunk-too-large`, `too-large` (past `RECORDINGS_MAX_MB`) or `quota`.' }
+        '429': { description: 'Hourly budget spent; `Retry-After` says when.' }
+        '507': { description: 'The server''s disk is nearly full.' }
+  /api/recordings/{name}/finish:
+    parameters:
+      - $ref: '#/components/parameters/RecordingName'
+    post:
+      tags: [recordings]
+      operationId: finishRecording
+      summary: Complete a recording with its manifest
+      description: |
+        The watch's manifest (`format: opengym-watch-motion`) and the motion file's total `size`
+        and `sha256`. A mismatch with what was uploaded is a 409 (`incomplete`, with the size
+        held) or a 422 (`hash-mismatch`, and the partial upload is dropped). Repeating a finish
+        that already succeeded answers the same recording.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [manifest, size, sha256]
+              properties:
+                manifest: { type: object }
+                size: { type: integer }
+                sha256: { type: string, pattern: '^[0-9a-f]{64}$' }
+      responses:
+        '200': { description: 'Stored.', content: { application/json: { schema: { $ref: '#/components/schemas/Recording' } } } }
+        '400': { description: 'Not a watch manifest.' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409': { description: 'The motion file is not all there yet; `size` is what the server holds.' }
+        '422': { description: 'The motion file does not match its sha256.' }
 components:
+  parameters:
+    RecordingName:
+      name: name
+      in: path
+      required: true
+      description: The watch's name for the recording, `opengym-YYYYMMDD-HHMMSS`.
+      schema: { type: string, pattern: '^opengym-[0-9]{8}-[0-9]{6}$' }
   securitySchemes:
     cookieAuth:
       type: apiKey
@@ -3099,6 +3226,15 @@ components:
           example: { error: "that code is wrong, used or expired", code: "link-invalid" }
 
   schemas:
+    Recording:
+      type: object
+      properties:
+        name: { type: string, example: opengym-20261017-181500 }
+        bytes: { type: integer, description: Both files together. }
+        start: { type: integer, nullable: true, description: Epoch ms the recording started. }
+        end: { type: integer, nullable: true }
+        sets: { type: integer, description: Sets labelled with a Done. }
+        session: { type: string, description: The workout's name. }
     Error:
       type: object
       required: [error]

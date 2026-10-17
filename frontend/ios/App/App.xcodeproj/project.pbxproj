@@ -3,38 +3,139 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007530D86DE3B61BC4E31DD7 /* RestActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B30212DEE0BD274322EF01 /* RestActivity.swift */; };
+		07A6725F5C154A17C5EAECEB /* RecordingUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31692AD094A34D8AFBF0871 /* RecordingUploader.swift */; };
+		09686080114D5F52C7DEDDC0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140FB96E7D12D25AB44A2DD6 /* SwiftUI.framework */; };
+		1AFE158F6995375623A9D7B2 /* RestActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529948FBB9F49997E173A84F /* RestActivityWidget.swift */; };
+		25441F26B2C83DCB0DEDF979 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545BB61AC7BEC2D3AC8EA75D /* WatchKit.framework */; };
+		2590FBE5605727662FB7A331 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF561228604764D75E54E760 /* HealthKit.framework */; };
+		2B937974352F88B362C973DC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D369ED014E8B2C25EDB5795 /* WidgetKit.framework */; };
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		375A0FEFB7AE19CE2E4F89F0 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5956D578FE63C3EFC180119C /* WorkoutManager.swift */; };
+		37B4198834B8F69D74DB914E /* OpenGymWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92716ED0B87E61E5E0C71508 /* OpenGymWatchApp.swift */; };
+		3C9E8FC520D4A641F5E81B7A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8B31A4E3ABE6F0721F9BF0C /* SwiftUI.framework */; };
+		40E8A6840725AC913378E244 /* RestAlertPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7346BE9A3016E85C6BC54EE /* RestAlertPlugin.swift */; };
+		4A0BBDFE60545D25A81BD35A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870AFE5136DE98D58003ED17 /* HealthKit.framework */; };
+		4F7F62A52D6A3EDC1D070B39 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5FC7AABC2289EA9FCC7800 /* WatchConnectivity.framework */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		AA0000000000000000000002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000001 /* SceneDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		5FF87613672A7EFCF41EB88A /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD812668F8C6085C9B4368 /* Snapshot.swift */; };
+		6C9CD2D3D87740663430789E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8F019197BCFF0BB77DA6840 /* Foundation.framework */; };
+		77B8E922206B0A367113C2E3 /* ActivityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F3F7231ADAB56543562EB5C /* ActivityKit.framework */; };
+		77D98565705A88C1D3B1D0DF /* WatchPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD02C7304636FC93149182E /* WatchPlugin.swift */; };
+		7E6AA2C38573D65F11290B9C /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF107BF7A0CC3A4D986C36A4 /* AppViewController.swift */; };
+		8311C3BE8F353F3B88D85FE4 /* WatchLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596BDE45F0D580E8864E625 /* WatchLink.swift */; };
+		94B5DFE0D90D69FDDCBE917A /* AppIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB571A4F3BC907AFD6ABE6B2 /* AppIntents.framework */; };
+		99CAADDD792C1EEF5178FA7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5DD5CBB9B48FE40E07BBDE /* Foundation.framework */; };
+		99F33A85886602F665AF7A09 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2B16935D73141BA06319A0 /* Views.swift */; };
+		9CEE28DC40C48FB2F153A622 /* SensorRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFA9223183485093B0BC02A /* SensorRecorder.swift */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		AA0000000000000000000002 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000001 /* SceneDelegate.swift */; };
 		AA0100000000000000000002 /* PrintPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0100000000000000000001 /* PrintPlugin.swift */; };
-		AA0100000000000000000004 /* PrintPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0100000000000000000003 /* PrintPlugin.m */; };
+		AB7C8938C13C6EE1350637E5 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CFC6AF6BA06A1E4FD6EFA00 /* WatchConnectivity.framework */; };
+		C286CAF75663EEF76C20F8BA /* WatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC22B3DED1C971E7A0EC0B2 /* WatchModel.swift */; };
+		CD649555A47A5A69565986CA /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58987F816D82CFFEDFDC9816 /* CoreMotion.framework */; };
+		D0218403957613C8D752D5A1 /* RestActivity.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2F68E3FC896CDDD57A66EB85 /* RestActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EEDF9E29F138F67BFDD2935A /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BB5AAA839CFFDA01BEAD8607 /* Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FFAE96CDBB74E5DAB82862D0 /* RestActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B30212DEE0BD274322EF01 /* RestActivity.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		604F1DE8F0FCC1EE450EA36B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2292B1B4115ACCBAFCFBC457;
+			remoteInfo = Watch;
+		};
+		738796D2BEB16954E6F32B04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 620007BF5C6E90EC4515FF09;
+			remoteInfo = RestActivity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8E8E132CE8F7CA3883C5FEED /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				EEDF9E29F138F67BFDD2935A /* Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4906BCAB64F20564CDA4237 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D0218403957613C8D752D5A1 /* RestActivity.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		140FB96E7D12D25AB44A2DD6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		172A790C0F9094192897EDA0 /* Watch.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = Watch.entitlements; sourceTree = "<group>"; };
+		1CFC6AF6BA06A1E4FD6EFA00 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		1D568912EFE4C41A756C0531 /* App.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		2F68E3FC896CDDD57A66EB85 /* RestActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RestActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
+		32B30212DEE0BD274322EF01 /* RestActivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RestActivity.swift; sourceTree = "<group>"; };
+		3ACD812668F8C6085C9B4368 /* Snapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		3D369ED014E8B2C25EDB5795 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
+		4E2B16935D73141BA06319A0 /* Views.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		4F3F7231ADAB56543562EB5C /* ActivityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActivityKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/ActivityKit.framework; sourceTree = DEVELOPER_DIR; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA0000000000000000000001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AA0100000000000000000001 /* PrintPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintPlugin.swift; sourceTree = "<group>"; };
-		AA0100000000000000000003 /* PrintPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrintPlugin.m; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		529948FBB9F49997E173A84F /* RestActivityWidget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RestActivityWidget.swift; sourceTree = "<group>"; };
+		545BB61AC7BEC2D3AC8EA75D /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/WatchKit.framework; sourceTree = DEVELOPER_DIR; };
+		58987F816D82CFFEDFDC9816 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		5956D578FE63C3EFC180119C /* WorkoutManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		6C5FC7AABC2289EA9FCC7800 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		6F5DD5CBB9B48FE40E07BBDE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7596BDE45F0D580E8864E625 /* WatchLink.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchLink.swift; sourceTree = "<group>"; };
+		7AD02C7304636FC93149182E /* WatchPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchPlugin.swift; sourceTree = "<group>"; };
+		870AFE5136DE98D58003ED17 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		92716ED0B87E61E5E0C71508 /* OpenGymWatchApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OpenGymWatchApp.swift; sourceTree = "<group>"; };
+		9FFA9223183485093B0BC02A /* SensorRecorder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SensorRecorder.swift; sourceTree = "<group>"; };
+		A8F019197BCFF0BB77DA6840 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		AA0000000000000000000001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AA0100000000000000000001 /* PrintPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintPlugin.swift; sourceTree = "<group>"; };
+		AC5D43A70D14212B8FD764CC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF107BF7A0CC3A4D986C36A4 /* AppViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
+		BB5AAA839CFFDA01BEAD8607 /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF561228604764D75E54E760 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		C8B31A4E3ABE6F0721F9BF0C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		CB2B1042F16C3F82BD09E540 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D31692AD094A34D8AFBF0871 /* RecordingUploader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RecordingUploader.swift; sourceTree = "<group>"; };
+		DFC22B3DED1C971E7A0EC0B2 /* WatchModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatchModel.swift; sourceTree = "<group>"; };
+		E7346BE9A3016E85C6BC54EE /* RestAlertPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RestAlertPlugin.swift; sourceTree = "<group>"; };
+		EB571A4F3BC907AFD6ABE6B2 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/AppIntents.framework; sourceTree = DEVELOPER_DIR; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +145,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
+				2590FBE5605727662FB7A331 /* HealthKit.framework in Frameworks */,
+				AB7C8938C13C6EE1350637E5 /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D59538C1D9E2DA1DB209171 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99CAADDD792C1EEF5178FA7D /* Foundation.framework in Frameworks */,
+				3C9E8FC520D4A641F5E81B7A /* SwiftUI.framework in Frameworks */,
+				25441F26B2C83DCB0DEDF979 /* WatchKit.framework in Frameworks */,
+				4F7F62A52D6A3EDC1D070B39 /* WatchConnectivity.framework in Frameworks */,
+				4A0BBDFE60545D25A81BD35A /* HealthKit.framework in Frameworks */,
+				CD649555A47A5A69565986CA /* CoreMotion.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3B5B4CDA2CCDE266A2A88F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C9CD2D3D87740663430789E /* Foundation.framework in Frameworks */,
+				2B937974352F88B362C973DC /* WidgetKit.framework in Frameworks */,
+				09686080114D5F52C7DEDDC0 /* SwiftUI.framework in Frameworks */,
+				77B8E922206B0A367113C2E3 /* ActivityKit.framework in Frameworks */,
+				94B5DFE0D90D69FDDCBE917A /* AppIntents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */,
+				9CE650BF698D9A0EAEEF7EF6 /* iOS */,
+				B326E5C2E1AC1244AFA164B0 /* watchOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -65,6 +195,9 @@
 				504EC3051FED79650016851F /* Products */,
 				7F8756D8B27F46E3366F6CEA /* Pods */,
 				27E2DDA53C4D2A4D1A88CE4A /* Frameworks */,
+				5714754481F94F30B4B16057 /* Shared */,
+				88D8FA20926160D923125ABE /* RestActivity */,
+				E529482DCFAD4D8BD4DF543A /* Watch */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+				2F68E3FC896CDDD57A66EB85 /* RestActivity.appex */,
+				BB5AAA839CFFDA01BEAD8607 /* Watch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,15 +218,29 @@
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				AA0000000000000000000001 /* SceneDelegate.swift */,
 				AA0100000000000000000001 /* PrintPlugin.swift */,
-				AA0100000000000000000003 /* PrintPlugin.m */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
+				AF107BF7A0CC3A4D986C36A4 /* AppViewController.swift */,
+				E7346BE9A3016E85C6BC54EE /* RestAlertPlugin.swift */,
+				7596BDE45F0D580E8864E625 /* WatchLink.swift */,
+				7AD02C7304636FC93149182E /* WatchPlugin.swift */,
+				1D568912EFE4C41A756C0531 /* App.entitlements */,
+				D31692AD094A34D8AFBF0871 /* RecordingUploader.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		5714754481F94F30B4B16057 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				32B30212DEE0BD274322EF01 /* RestActivity.swift */,
+			);
+			name = Shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		7F8756D8B27F46E3366F6CEA /* Pods */ = {
@@ -103,9 +252,79 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		88D8FA20926160D923125ABE /* RestActivity */ = {
+			isa = PBXGroup;
+			children = (
+				529948FBB9F49997E173A84F /* RestActivityWidget.swift */,
+				AC5D43A70D14212B8FD764CC /* Info.plist */,
+			);
+			name = RestActivity;
+			path = RestActivity;
+			sourceTree = "<group>";
+		};
+		9CE650BF698D9A0EAEEF7EF6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A8F019197BCFF0BB77DA6840 /* Foundation.framework */,
+				3D369ED014E8B2C25EDB5795 /* WidgetKit.framework */,
+				140FB96E7D12D25AB44A2DD6 /* SwiftUI.framework */,
+				4F3F7231ADAB56543562EB5C /* ActivityKit.framework */,
+				EB571A4F3BC907AFD6ABE6B2 /* AppIntents.framework */,
+				BF561228604764D75E54E760 /* HealthKit.framework */,
+				1CFC6AF6BA06A1E4FD6EFA00 /* WatchConnectivity.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		B326E5C2E1AC1244AFA164B0 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				6F5DD5CBB9B48FE40E07BBDE /* Foundation.framework */,
+				C8B31A4E3ABE6F0721F9BF0C /* SwiftUI.framework */,
+				545BB61AC7BEC2D3AC8EA75D /* WatchKit.framework */,
+				6C5FC7AABC2289EA9FCC7800 /* WatchConnectivity.framework */,
+				870AFE5136DE98D58003ED17 /* HealthKit.framework */,
+				58987F816D82CFFEDFDC9816 /* CoreMotion.framework */,
+			);
+			name = watchOS;
+			sourceTree = "<group>";
+		};
+		E529482DCFAD4D8BD4DF543A /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				92716ED0B87E61E5E0C71508 /* OpenGymWatchApp.swift */,
+				3ACD812668F8C6085C9B4368 /* Snapshot.swift */,
+				DFC22B3DED1C971E7A0EC0B2 /* WatchModel.swift */,
+				5956D578FE63C3EFC180119C /* WorkoutManager.swift */,
+				4E2B16935D73141BA06319A0 /* Views.swift */,
+				CB2B1042F16C3F82BD09E540 /* Info.plist */,
+				172A790C0F9094192897EDA0 /* Watch.entitlements */,
+				9FFA9223183485093B0BC02A /* SensorRecorder.swift */,
+			);
+			name = Watch;
+			path = Watch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2292B1B4115ACCBAFCFBC457 /* Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C73865F7DFFAC55DA20AAD9 /* Build configuration list for PBXNativeTarget "Watch" */;
+			buildPhases = (
+				79E0705DF8F35FEC68086DE6 /* Sources */,
+				8D59538C1D9E2DA1DB209171 /* Frameworks */,
+				270047A2392238C273F2E77C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Watch;
+			productName = Watch;
+			productReference = BB5AAA839CFFDA01BEAD8607 /* Watch.app */;
+			productType = "com.apple.product-type.application";
+		};
 		504EC3031FED79650016851F /* App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */;
@@ -115,15 +334,36 @@
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
 				9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */,
+				E4906BCAB64F20564CDA4237 /* Embed Foundation Extensions */,
+				8E8E132CE8F7CA3883C5FEED /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				38AF5E3F07A4CCB772A9AB96 /* PBXTargetDependency */,
+				3F898475AFB01AE3C638C359 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
+		};
+		620007BF5C6E90EC4515FF09 /* RestActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC4541FC136BB5EDE751AB0F /* Build configuration list for PBXNativeTarget "RestActivity" */;
+			buildPhases = (
+				68C96D67A36F7E0123242DCF /* Sources */,
+				A3B5B4CDA2CCDE266A2A88F6 /* Frameworks */,
+				4D41F39C0D77037F44D66739 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestActivity;
+			productName = RestActivity;
+			productReference = 2F68E3FC896CDDD57A66EB85 /* RestActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -131,8 +371,9 @@
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 920;
-				LastUpgradeCheck = 920;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
@@ -150,18 +391,32 @@
 				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
-			packageReferences = (
-			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+				620007BF5C6E90EC4515FF09 /* RestActivity */,
+				2292B1B4115ACCBAFCFBC457 /* Watch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		270047A2392238C273F2E77C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D41F39C0D77037F44D66739 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		504EC3021FED79650016851F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,11 +476,53 @@
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				AA0000000000000000000002 /* SceneDelegate.swift in Sources */,
 				AA0100000000000000000002 /* PrintPlugin.swift in Sources */,
-				AA0100000000000000000004 /* PrintPlugin.m in Sources */,
+				7E6AA2C38573D65F11290B9C /* AppViewController.swift in Sources */,
+				40E8A6840725AC913378E244 /* RestAlertPlugin.swift in Sources */,
+				007530D86DE3B61BC4E31DD7 /* RestActivity.swift in Sources */,
+				8311C3BE8F353F3B88D85FE4 /* WatchLink.swift in Sources */,
+				77D98565705A88C1D3B1D0DF /* WatchPlugin.swift in Sources */,
+				07A6725F5C154A17C5EAECEB /* RecordingUploader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C96D67A36F7E0123242DCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AFE158F6995375623A9D7B2 /* RestActivityWidget.swift in Sources */,
+				FFAE96CDBB74E5DAB82862D0 /* RestActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79E0705DF8F35FEC68086DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37B4198834B8F69D74DB914E /* OpenGymWatchApp.swift in Sources */,
+				5FF87613672A7EFCF41EB88A /* Snapshot.swift in Sources */,
+				C286CAF75663EEF76C20F8BA /* WatchModel.swift in Sources */,
+				375A0FEFB7AE19CE2E4F89F0 /* WorkoutManager.swift in Sources */,
+				99F33A85886602F665AF7A09 /* Views.swift in Sources */,
+				9CEE28DC40C48FB2F153A622 /* SensorRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		38AF5E3F07A4CCB772A9AB96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestActivity;
+			target = 620007BF5C6E90EC4515FF09 /* RestActivity */;
+			targetProxy = 738796D2BEB16954E6F32B04 /* PBXContainerItemProxy */;
+		};
+		3F898475AFB01AE3C638C359 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Watch;
+			target = 2292B1B4115ACCBAFCFBC457 /* Watch */;
+			targetProxy = 604F1DE8F0FCC1EE450EA36B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
@@ -247,6 +544,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		17F7628369B091DD7E175ED8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Watch/Watch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = openGym;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "openGym shows your heart rate and calories while you train.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "openGym saves the workouts you track on your Apple Watch to Health.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = pedro.opengym;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym.watchkitapp;
+				PRODUCT_NAME = openGym;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 		504EC3141FED79650016851F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -261,6 +592,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -268,8 +600,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -281,6 +615,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -299,6 +634,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -318,6 +654,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -325,8 +662,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -338,6 +677,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -349,7 +689,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -359,14 +701,19 @@
 			baseConfigurationReference = FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = ch.duartesantos.opengym;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
@@ -379,19 +726,108 @@
 			baseConfigurationReference = AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.duartesantos.opengym;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		655ED7EF75E1EDAB5B3FF2DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RestActivity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym.RestActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C4956DDB72342093CFCE205B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = RestActivity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym.RestActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E175CC05EA1EF6DC4F4A13BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Watch/Watch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V3W2Z82AFD;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = openGym;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "openGym shows your heart rate and calories while you train.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "openGym saves the workouts you track on your Apple Watch to Health.";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = pedro.opengym;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pedro.opengym.watchkitapp;
+				PRODUCT_NAME = openGym;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -410,6 +846,24 @@
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
 				504EC3181FED79650016851F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C73865F7DFFAC55DA20AAD9 /* Build configuration list for PBXNativeTarget "Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17F7628369B091DD7E175ED8 /* Release */,
+				E175CC05EA1EF6DC4F4A13BC /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC4541FC136BB5EDE751AB0F /* Build configuration list for PBXNativeTarget "RestActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				655ED7EF75E1EDAB5B3FF2DE /* Release */,
+				C4956DDB72342093CFCE205B /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

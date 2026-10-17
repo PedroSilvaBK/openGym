@@ -16,13 +16,14 @@ import { unlock, chime, playOnSilentSupported, vibrateSupported, appleTouchDevic
 import { REST_SOUND_IDS, restSoundOf } from '../lib/rest-sounds.js'
 import { scheduleModeOf, chooseFixedWeek, chooseRotation } from '../lib/rotation.js'
 import { queueOf } from '../lib/queue.js'
-import { api, webauthnOK, passkeyRegister, passkeyError, IS_ANDROID } from '../lib/api.js'
+import { api, webauthnOK, passkeyRegister, passkeyError, IS_ANDROID, remoteAuth } from '../lib/api.js'
 import { pushSupported, enablePush, disablePush, sendTestPush, syncPushSubscription } from '../lib/push.js'
 import { wakeLockSupported } from '../lib/wakelock.js'
 import { t, tn, LANGS, INSTR_LANGS, EXERCISE_NAME_LANGS, baseLang, dateLocale } from '../lib/i18n.js'
 import { effectiveLang } from '../lib/default-lang.js'
 import { DEMO, REPO } from '../lib/demo.js'
 import { MOBILE, isAndroid, shareExport, shareExportBlob, syncReminder } from '../lib/mobile.js'
+import { listRecordings, deleteRecordings, shareRecordings, watchStatus } from '../lib/watch.js'
 import { NUDGE_COPY, NUDGE_TONES, toneOf } from '../lib/nudge.js'
 import { referencedFiles } from '../lib/media-refs.js'
 import { mediaStore } from '../lib/media-store.js'
@@ -785,6 +786,7 @@ export default function Settings({ page = null, find = null, via = null }) {
         {MOBILE && android && S.autoBackup && <BackupFolderRow />}
       </Section>
       {MOBILE && android && <HealthConnectCard S={S} toast={toast} />}
+      {MOBILE && !android && <WatchRecordingsCard toast={toast} />}
       <Section title={t('Bring data in')}>
         <Row icon="download" iconTint="var(--teal)" title={t('Import backup')} accessory="chevron" onClick={() => fileRef.current.click()} />
         <Row icon="download" iconTint="var(--teal)" title={t('Import from another app')}
@@ -1433,6 +1435,71 @@ function RegisterInline({ close, setUser, pushState, pullState, toast }) {
 // its own file (lib/health-sync.js) and not in S, so it never switches on anywhere else. The card
 // stays out of the way on a phone without Health Connect, and only points to installing it on
 // Android 13 and lower, where it is an app of its own.
+// iOS app with an Apple Watch: the motion the watch recorded with Record motion on. Training data
+// for set detection — see ml/README.md. A paired server that takes them (RECORDINGS=1) gets them
+// after every workout (store/watch-sync.js syncRecordings); otherwise they stay on this phone
+// until shared.
+function WatchRecordingsCard({ toast }) {
+  const [files, setFiles] = useState(null)
+  const [server, setServer] = useState(null)   // { count, mb } on a server that takes them
+  const [paired, setPaired] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const loadServer = async () => {
+    const config = await useStore.getState().loadConfig()
+    if (!remoteAuth() || !config?.recordings) { setServer(null); return }
+    const { recordings = [] } = await api('/api/recordings')
+    setServer({ count: recordings.length, mb: recordings.reduce((n, r) => n + (r.bytes || 0), 0) / (1024 * 1024) })
+  }
+  const load = () => {
+    listRecordings().then(setFiles).catch(() => setFiles(null))
+    loadServer().catch(() => setServer(null))
+  }
+  useEffect(() => {
+    load()
+    watchStatus().then(st => setPaired(!!st?.paired)).catch(() => {})
+  }, [])
+  if (!files || (!paired && !files.length && !server)) return null
+  const mb = files.reduce((n, f) => n + (f.bytes || 0), 0) / (1024 * 1024)
+  // Two files make one recording on this phone.
+  const waiting = Math.ceil(files.length / 2)
+  const upload = async () => {
+    setBusy(true)
+    try {
+      const { syncRecordings } = await import('../store/watch-sync.js')
+      const r = await syncRecordings({ fresh: true })
+      if (!r || r.error) toast(t('Couldn’t upload. They stay on this phone and go up next time.'))
+    } catch { toast(t('Couldn’t upload. They stay on this phone and go up next time.')) }
+    setBusy(false)
+    load()
+  }
+  const share = async () => {
+    setBusy(true)
+    try { await shareRecordings(files) } catch { /* the sheet was closed */ }
+    setBusy(false)
+  }
+  const remove = () => confirmSheet({
+    title: t('Delete the watch recordings?'),
+    confirmText: t('Delete'), danger: true,
+    onConfirm: async () => { await deleteRecordings().catch(() => {}); load() },
+  })
+  return (
+    <Section title={t('Watch recordings')}
+      footer={t('Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.')}>
+      {server && <Row icon="check" iconTint="var(--green)" title={t('On your server')}
+        subtitle={t('{0} recordings · {1} MB', server.count, server.mb.toFixed(1))} />}
+      {server && files.length > 0 && <Row icon="share" iconTint="var(--green)" title={t('Upload now')}
+        subtitle={t('{0} waiting to upload', waiting)} accessory="chevron" onClick={busy ? undefined : upload} />}
+      {files.length
+        ? <>
+          <Row icon="share" iconTint="var(--blue)" title={t('Share')}
+            subtitle={t('{0} files · {1} MB', files.length, mb.toFixed(1))} accessory="chevron" onClick={busy ? undefined : share} />
+          <Row icon="trash" iconTint="var(--red)" title={t('Delete')} accessory="chevron" onClick={remove} />
+        </>
+        : !server && <Row icon="info" iconTint="var(--blue)" title={t('None yet. Switch on Record motion on the watch to collect some.')} />}
+    </Section>
+  )
+}
+
 function HealthConnectCard({ S, toast }) {
   const [st, setSt] = useState(null)
   const [h, setH] = useState(null)

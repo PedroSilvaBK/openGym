@@ -22,6 +22,9 @@ startMediaSync(useStore)
 // this keeps the focused field above it. Idle everywhere else.
 startNativeKeyboard()
 
+// The iOS app's Apple Watch link (store/watch-sync.js). Idle on Android, where nothing answers.
+if (MOBILE) import('./store/watch-sync.js').catch(() => {})
+
 // Not in the mobile build: the native shell already serves everything from disk.
 if (!MOBILE && 'serviceWorker' in navigator && location.protocol === 'https:') {
   navigator.serviceWorker.register('sw.js').catch(() => {})

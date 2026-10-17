@@ -26,6 +26,7 @@ import {
   normalizeEmail, maskEmail
 } from './password.js';
 import { createBackoff, createWindow } from './rate-limit.js';
+import { createRecordingStore, recordingLimits, readChunk, RecordingError, CHUNK_BYTES } from './recordings.js';
 import {
   listPasskeys, addPasskeyRecord, renamePasskeyRecord, removePasskeyRecord, passkeyRemovalRefused, MAX_PASSKEYS
 } from './passkeys-store.js';
@@ -1826,6 +1827,81 @@ async function sendMediaFile(res, f, hash) {
   catch { res.destroy(); }   // the client went away mid-download; nothing left to answer
 }
 
+// Apple Watch training data (recordings.js): a workout's motion and its labels, uploaded by the
+// paired phone in chunks that fit the 5 MB /api/ body cap. Per profile, behind the session, with
+// a quota and a free-disk floor. Only with RECORDINGS=1.
+const REC_LIMITS = recordingLimits(process.env);
+const REC_ON = REC_LIMITS.enabled;
+const RECORDINGS = createRecordingStore({ dir: path.join(DATA, 'recordings'), limits: REC_LIMITS });
+// A 10-hour recording is 50 chunks; an hour's budget of 600 is a phone catching up on a backlog.
+const REC_BURST = createWindow({ max: 600, windowMs: 3600000 });
+setInterval(() => {
+  REC_BURST.sweep();
+  try { RECORDINGS.cleanPartial(); } catch (e) { console.error('recordings: cleanup failed', e.message); }
+}, 3600000).unref();
+function recordingThrottle(user) {
+  const wait = REC_BURST.take(user.id);
+  if (wait) throw new RecordingError(429, 'locked', { retryAfter: wait });
+}
+async function sendRecordingFile(res, file, name, kind) {
+  const size = fs.statSync(file).size;
+  res.writeHead(200, {
+    'Content-Type': kind === 'json' ? 'application/json' : 'application/octet-stream',
+    'Content-Length': String(size),
+    'Content-Disposition': `attachment; filename="${name}.${kind}"`,
+    'Cache-Control': 'private, no-store',
+    'X-Content-Type-Options': 'nosniff',
+    'Content-Security-Policy': "default-src 'none'; sandbox",
+    'Cross-Origin-Resource-Policy': 'same-origin',
+  });
+  try { await pipeline(fs.createReadStream(file), res); }
+  catch { res.destroy(); }
+}
+
+const recordingRoutes = {
+  // The caller's recordings: name, bytes, start/end, how many sets were labelled, the session.
+  'GET /api/recordings': async (req, res) => {
+    const user = readSession(req);
+    if (!user) return json(res, 401, { error: 'not signed in' });
+    json(res, 200, { recordings: RECORDINGS.list(user.id), chunkBytes: CHUNK_BYTES });
+  },
+  // One chunk of the motion file at ?offset=N (raw bytes, at most CHUNK_BYTES). Answers how much
+  // the server holds; a 409 with `size` says where to resume.
+  'POST /api/recordings/{name}/chunk': async (req, res) => {
+    const user = readSession(req);
+    if (!user) return json(res, 401, { error: 'not signed in' });
+    recordingThrottle(user);
+    const offset = Number(new URL(req.url, 'http://x').searchParams.get('offset'));
+    const bytes = await readChunk(req, CHUNK_BYTES);
+    json(res, 200, RECORDINGS.append(user.id, req.recordingName, offset, bytes));
+  },
+  // The manifest, with the motion file's size and sha256: the recording is complete.
+  'POST /api/recordings/{name}/finish': async (req, res) => {
+    const user = readSession(req);
+    if (!user) return json(res, 401, { error: 'not signed in' });
+    recordingThrottle(user);
+    const body = await readBody(req);
+    const r = RECORDINGS.finish(user.id, req.recordingName, { manifest: body.manifest, size: Number(body.size), sha256: body.sha256 });
+    audit(req, 'recordings.upload', { user, msg: `${req.recordingName} ${r.sets} set(s), ${(r.bytes / 1048576).toFixed(1)} MB` });
+    json(res, 200, r);
+  },
+  // ?file=motion|json, as a download.
+  'GET /api/recordings/{name}': async (req, res) => {
+    const user = readSession(req);
+    if (!user) return json(res, 401, { error: 'not signed in' });
+    const kind = new URL(req.url, 'http://x').searchParams.get('file') || 'json';
+    const file = RECORDINGS.file(user.id, req.recordingName, kind);
+    if (!file) return json(res, 404, { error: 'not found' });
+    await sendRecordingFile(res, file, req.recordingName, kind);
+  },
+  'DELETE /api/recordings/{name}': async (req, res) => {
+    const user = readSession(req);
+    if (!user) return json(res, 401, { error: 'not signed in' });
+    const removed = RECORDINGS.remove(user.id, req.recordingName);
+    json(res, removed ? 200 : 404, removed ? { ok: true } : { error: 'not found' });
+  },
+};
+
 const mediaRoutes = {
   // The raw bytes of one file, named by the sha256 the client computed. media.js checks the
   // hash, the magic bytes, the caps, the quota and the free disk; this route only adds the
@@ -1941,6 +2017,9 @@ const routes = {
       // Public like the two flags above: the caps are not a secret, and the absence of the
       // block is how the app knows this server does not take photos and videos at all.
       ...(MEDIA_ON ? { media: mediaConfig(MEDIA_LIMITS) } : {}),
+      // Public like the media caps: the phone uploads watch recordings only to a server that
+      // says it takes them, and keeps them itself otherwise.
+      ...(REC_ON ? { recordings: { chunkBytes: CHUNK_BYTES } } : {}),
       ...(readSession(req) ? { coach: coachConfig.publicConfig() } : {})
     });
   },
@@ -2490,6 +2569,7 @@ const routes = {
     try { coachConfig.clearProfileAuth(u.id); } catch { /* nothing stored */ }
     // Their photos and videos — the one place a profile's folder under uploads/ is removed.
     try { MEDIA.removeUser(u.id); } catch (e) { console.error('media: could not remove uploads of', u.id, e.message); }
+    try { RECORDINGS.removeUser(u.id); } catch (e) { console.error('recordings: could not remove', u.id, e.message); }
     saveDb();
     // Logged with the name, because the id is about to mean nothing to anyone reading this back.
     audit(req, 'admin.user.delete', { user: admin, msg: name });
@@ -2578,7 +2658,8 @@ const routes = {
   /* ---------- photos & videos ---------- */
   // Absent, not refusing, when MEDIA_UPLOADS=0: a 404 is what a server from before the feature
   // answers, and the client already treats that as "this server does not store them".
-  ...(MEDIA_ON ? mediaRoutes : {})
+  ...(MEDIA_ON ? mediaRoutes : {}),
+  ...(REC_ON ? recordingRoutes : {})
 };
 
 /* ---------- Coach: boot recovery, notifications, scheduled reviews ---------- */
@@ -2658,6 +2739,9 @@ const server = http.createServer(async (req, res) => {
   // above stays a plain lookup, and so csrfOk and the catch-all see one name for every file.
   const mm = /^\/api\/media\/([0-9a-f]{64})$/.exec(url.pathname);
   if (mm) { key = req.method + ' /api/media/{hash}'; req.mediaHash = mm[1]; }
+  // And the watch recordings: one name, optionally a step of its upload.
+  const rm = /^\/api\/recordings\/([A-Za-z0-9-]{1,64})(?:\/(chunk|finish))?$/.exec(url.pathname);
+  if (rm) { key = req.method + ' /api/recordings/{name}' + (rm[2] ? '/' + rm[2] : ''); req.recordingName = rm[1]; }
   const handler = routes[key];
   if (!handler) return json(res, 404, { error: 'not found' });
   if (!csrfOk(req, key)) {
@@ -2685,6 +2769,10 @@ const server = http.createServer(async (req, res) => {
     // A refused upload or a missing file: the caller's to act on, never a logged 500.
     if (e instanceof MediaError) {
       if (!res.headersSent) json(res, e.status, { error: e.message, code: e.code, ...e.extra }, e.headers);
+      return;
+    }
+    if (e instanceof RecordingError) {
+      if (!res.headersSent) json(res, e.status, { error: e.message, code: e.code, ...e.extra }, e.status === 429 ? { 'Retry-After': String(e.extra.retryAfter) } : undefined);
       return;
     }
     // Every scrypt slot and the short queue behind them are taken (password.js).

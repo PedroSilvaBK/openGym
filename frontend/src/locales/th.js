@@ -2253,4 +2253,13 @@ export default {
   'Your sports watch, calling you back.': 'นาฬิกาสปอร์ตเรียกคุณกลับมาแล้ว',
   'Coach wants you back on the bar.': 'โค้ชอยากให้คุณกลับมาที่บาร์',
   'Gentle, for headphones or a quiet room.': 'เบา ๆ สำหรับหูฟังหรือห้องที่เงียบ',
+  'Watch recordings': 'การบันทึกจากนาฬิกา',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'การเคลื่อนไหวที่ Apple Watch บันทึกระหว่างออกกำลังกาย เพื่อฝึกการตรวจจับเซ็ต จะอยู่ในโทรศัพท์เครื่องนี้จนกว่าคุณจะแชร์',
+  '{0} files · {1} MB': '{0} ไฟล์ · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': 'ยังไม่มี เปิด “Record motion” บนนาฬิกาเพื่อเก็บข้อมูล',
+  'Delete the watch recordings?': 'ลบการบันทึกจากนาฬิกาไหม',
+  'On your server': 'บนเซิร์ฟเวอร์ของคุณ',
+  '{0} recordings · {1} MB': '{0} การบันทึก · {1} MB',
+  'Upload now': 'อัปโหลดตอนนี้',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'อัปโหลดไม่สำเร็จ จะเก็บไว้ในโทรศัพท์เครื่องนี้และอัปโหลดในครั้งถัดไป',
 }

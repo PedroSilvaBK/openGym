@@ -131,6 +131,7 @@ const TAGS = {
   push: { title: 'Push', side: 'Notifications &amp; rest timer' },
   activity: { title: 'Activity', side: 'Live presence' },
   media: { title: 'Media', side: 'Photos &amp; videos of your exercises &amp; workouts' },
+  recordings: { title: 'Watch recordings', side: 'Apple Watch motion for set detection' },
   // A tag missing from this map renders nowhere at all, silently, so every tag in the
   // spec needs a line here.
   coach: { title: 'AI Coach', side: 'Plans, reviews, debriefs' },

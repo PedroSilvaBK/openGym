@@ -5,3 +5,7 @@ data
 .env
 .git
 *.log
+# The native app shells: their copies of the built app and exercise media are not part of
+# the web image, and after a mobile build they are hundreds of MB of build context.
+frontend/ios
+frontend/android

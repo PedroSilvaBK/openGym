@@ -14,7 +14,14 @@ import UIKit
  *   await Print.printHtml({ html: '<!doctype html>…', name: 'Weekly Training Plan' });
  */
 @objc(PrintPlugin)
-public class PrintPlugin: CAPPlugin {
+public class PrintPlugin: CAPPlugin, CAPBridgedPlugin {
+    // An app-local plugin is not in capacitor.config.json's packageClassList, so Capacitor 7 never
+    // registers it by itself: AppViewController.capacitorDidLoad does, which needs this conformance.
+    public let identifier = "PrintPlugin"
+    public let jsName = "Print"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "printHtml", returnType: CAPPluginReturnPromise)
+    ]
 
     @objc func printHtml(_ call: CAPPluginCall) {
         guard let html = call.getString("html"), !html.isEmpty else {

@@ -33,6 +33,9 @@ export function setAccessHeaders(h, origin) { accessHeaders = Object.assign({}, 
 const originOf = base => { try { return new URL(base).origin } catch { return '' } }
 const accessFor = base => (base && accessOrigin && originOf(base) === accessOrigin ? accessHeaders : {})
 const remoteHeaders = () => Object.assign({}, accessFor(remoteBase), remoteToken ? { Authorization: 'Bearer ' + remoteToken } : {})
+// The paired server and the headers a request to it carries, for native code that talks to it
+// itself (the watch recordings' upload, lib/watch.js). null when the phone is not paired.
+export const remoteAuth = () => (remoteBase && remoteToken ? { base: remoteBase, headers: remoteHeaders() } : null)
 
 export { appBase }
 

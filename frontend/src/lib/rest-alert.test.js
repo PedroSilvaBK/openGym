@@ -68,3 +68,17 @@ describe('rest alert outside the mobile build', () => {
     disarmRestAlert()
   })
 })
+
+describe('liveSession', async () => {
+  const { liveSession } = await import('./rest-alert.js')
+  it('is the running session: its start and name', () => {
+    expect(liveSession({ start: 1000, name: 'Full Body C', entries: [] })).toEqual({ workoutStart: 1000, workoutTitle: 'Full Body C' })
+    expect(liveSession({ start: 1000 })).toEqual({ workoutStart: 1000, workoutTitle: '' })
+  })
+  it('is nothing for no session, a past workout being logged or a saved one being edited', () => {
+    expect(liveSession(null)).toBe(null)
+    expect(liveSession({ start: 1000, backfill: { durationMin: 60 } })).toBe(null)
+    expect(liveSession({ start: 1000, editingWorkoutId: 'w1' })).toBe(null)
+    expect(liveSession({ name: 'x' })).toBe(null)
+  })
+})

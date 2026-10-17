@@ -1403,6 +1403,15 @@ export const PT_BR_OVERRIDES = {
   'Gentle, for headphones or a quiet room.': 'Suave, para fones de ouvido ou um lugar silencioso.',
   'Fewer than two workouts in this period. Pick a longer one.': 'Menos de dois treinos neste período. Escolha um mais longo.',
   'Releases are checked on GitHub. The download is verified against its checksum before the installer opens.': 'As versões são verificadas no GitHub. O download é conferido pela soma de verificação antes de abrir o instalador.',
+  'Watch recordings': 'Gravações do relógio',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'O movimento que seu Apple Watch gravou durante os treinos, para treinar a detecção de séries. Fica neste celular até você compartilhar.',
+  '{0} files · {1} MB': '{0} arquivos · {1} MB',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Nenhuma ainda. Ative “Record motion” no relógio para coletar algumas.',
+  'Delete the watch recordings?': 'Apagar as gravações do relógio?',
+  'On your server': 'No seu servidor',
+  '{0} recordings · {1} MB': '{0} gravações · {1} MB',
+  'Upload now': 'Enviar agora',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Não foi possível enviar. Elas ficam neste celular e vão na próxima vez.',
 }
 
 export default { ...pt, ...PT_BR_OVERRIDES }

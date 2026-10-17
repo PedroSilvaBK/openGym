@@ -2297,4 +2297,13 @@ export default {
   'Your sports watch, calling you back.': 'ساعتك الرياضية تناديك للعودة.',
   'Coach wants you back on the bar.': 'المدرب يريدك أن تعود إلى البار.',
   'Gentle, for headphones or a quiet room.': 'هادئ، للسماعات أو لغرفة هادئة.',
+  'Watch recordings': 'تسجيلات الساعة',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'الحركة التي سجّلتها Apple Watch أثناء التمارين، لتدريب اكتشاف نهاية المجموعة. تبقى على هذا الهاتف حتى تشاركها.',
+  '{0} files · {1} MB': '{0} ملفات · {1} ميغابايت',
+  'None yet. Switch on Record motion on the watch to collect some.': 'لا شيء بعد. فعّل “Record motion” على الساعة لجمع بعض التسجيلات.',
+  'Delete the watch recordings?': 'حذف تسجيلات الساعة؟',
+  'On your server': 'على خادمك',
+  '{0} recordings · {1} MB': '{0} تسجيلات · {1} ميغابايت',
+  'Upload now': 'ارفع الآن',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'تعذّر الرفع. ستبقى على هذا الهاتف وتُرفع في المرة القادمة.',
 }

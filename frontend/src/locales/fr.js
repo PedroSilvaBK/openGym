@@ -2242,4 +2242,13 @@ export default {
   'Your sports watch, calling you back.': 'Ta montre de sport te rappelle.',
   'Coach wants you back on the bar.': 'Le coach te veut de retour à la barre.',
   'Gentle, for headphones or a quiet room.': 'Tout doux, pour un casque ou une pièce calme.',
+  'Watch recordings': 'Enregistrements de la montre',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'Les mouvements enregistrés par ton Apple Watch pendant les séances, pour entraîner la détection des séries. Ils restent sur ce téléphone jusqu’à ce que tu les partages.',
+  '{0} files · {1} MB': '{0} fichiers · {1} Mo',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Aucun pour l’instant. Active « Record motion » sur la montre pour en collecter.',
+  'Delete the watch recordings?': 'Supprimer les enregistrements de la montre ?',
+  'On your server': 'Sur ton serveur',
+  '{0} recordings · {1} MB': '{0} enregistrements · {1} Mo',
+  'Upload now': 'Envoyer maintenant',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Échec de l’envoi. Ils restent sur ce téléphone et partiront la prochaine fois.',
 }

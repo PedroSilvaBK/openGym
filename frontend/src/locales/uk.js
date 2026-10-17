@@ -2239,4 +2239,13 @@ export default {
   'Your sports watch, calling you back.': 'Ваш спортивний годинник кличе вас назад.',
   'Coach wants you back on the bar.': 'Тренер чекає вас назад біля штанги.',
   'Gentle, for headphones or a quiet room.': 'Тихий, для навушників або спокійної кімнати.',
+  'Watch recordings': 'Записи з годинника',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'Рухи, які Apple Watch записав під час тренувань, для навчання розпізнавання підходів. Залишаються на цьому телефоні, доки ви ними не поділитеся.',
+  '{0} files · {1} MB': 'Файлів: {0} · {1} МБ',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Поки нічого. Увімкніть «Record motion» на годиннику, щоб зібрати записи.',
+  'Delete the watch recordings?': 'Видалити записи з годинника?',
+  'On your server': 'На вашому сервері',
+  '{0} recordings · {1} MB': 'Записів: {0} · {1} МБ',
+  'Upload now': 'Завантажити зараз',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Не вдалося завантажити. Записи залишаться на цьому телефоні й завантажаться наступного разу.',
 }

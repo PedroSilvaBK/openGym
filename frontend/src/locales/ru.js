@@ -2246,4 +2246,13 @@ export default {
   'Your sports watch, calling you back.': 'Ваши спортивные часы зовут вас обратно.',
   'Coach wants you back on the bar.': 'Тренер ждёт вас обратно у штанги.',
   'Gentle, for headphones or a quiet room.': 'Тихий, для наушников или спокойного зала.',
+  'Watch recordings': 'Записи с часов',
+  'Motion your Apple Watch recorded during workouts, to train set detection. It stays on this phone until you share it.': 'Движения, записанные Apple Watch во время тренировок, для обучения распознаванию подходов. Остаются на этом телефоне, пока вы ими не поделитесь.',
+  '{0} files · {1} MB': 'Файлов: {0} · {1} МБ',
+  'None yet. Switch on Record motion on the watch to collect some.': 'Пока ничего. Включите «Record motion» на часах, чтобы собрать записи.',
+  'Delete the watch recordings?': 'Удалить записи с часов?',
+  'On your server': 'На вашем сервере',
+  '{0} recordings · {1} MB': 'Записей: {0} · {1} МБ',
+  'Upload now': 'Загрузить сейчас',
+  'Couldn’t upload. They stay on this phone and go up next time.': 'Не удалось загрузить. Записи останутся на этом телефоне и загрузятся в следующий раз.',
 }
