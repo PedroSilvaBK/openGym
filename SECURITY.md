@@ -1,4 +1,4 @@
-# Security policy
+# Security policyasd
 
 openGym is a self-hosted app: you run the server, you hold the data. This file says which
 versions get fixes, how to report something privately, and — the part most people actually
